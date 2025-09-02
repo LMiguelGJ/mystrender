@@ -24,12 +24,12 @@ RUN mkdir -p /var/lib/mysterium-node /etc/redsocks /usr/local/bin
 COPY redsocks.conf /etc/redsocks/redsocks.conf
 
 # Descargar y extraer binario de Mysterium Node
-RUN curl -fSL -o /tmp/mysterium-node.tar.gz \
+RUN curl -fSL -o /tmp/myst_linux_amd64.tar.gz \
     https://github.com/mysteriumnetwork/node/releases/download/1.35.4/myst_linux_amd64.tar.gz \
-    && tar -xzf /tmp/mysterium-node.tar.gz -C /tmp \
-    && mv /tmp/myst_linux_amd64/mysterium-node /usr/local/bin/mysterium-node \
+    && tar -xzf /tmp/myst_linux_amd64.tar.gz -C /tmp \
+    && mv /tmp/myst /usr/local/bin/mysterium-node \
     && chmod +x /usr/local/bin/mysterium-node \
-    && rm -rf /tmp/mysterium-node.tar.gz /tmp/myst_linux_amd64
+    && rm -rf /tmp/myst_linux_amd64.tar.gz
 
 # Exponer puerto que usa Mysterium Node
 EXPOSE 4449
