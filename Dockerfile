@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y \
     sudo \
     redsocks \
     iproute2 \
-    iptables \
     iputils-ping \
     tar \
     && rm -rf /var/lib/apt/lists/*
@@ -23,7 +22,7 @@ RUN mkdir -p /var/lib/mysterium-node /etc/redsocks /usr/local/bin
 # Copiar configuración de Redsocks
 COPY redsocks.conf /etc/redsocks/redsocks.conf
 
-# Instalar Mysterium Node
+# Descargar y configurar Mysterium Node
 RUN curl -fSL -o /tmp/myst_linux_amd64.tar.gz \
     https://github.com/mysteriumnetwork/node/releases/download/1.35.4/myst_linux_amd64.tar.gz \
     && tar -xzf /tmp/myst_linux_amd64.tar.gz -C /tmp \
@@ -31,13 +30,15 @@ RUN curl -fSL -o /tmp/myst_linux_amd64.tar.gz \
     && chmod +x /usr/local/bin/mysterium-node \
     && rm -rf /tmp/myst_linux_amd64.tar.gz
 
-# Exponer puerto del nodo
+# Copiar el script de inicio
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Exponer puerto de Mysterium Node
 EXPOSE 4449
 
 # Variables de entorno
 ENV MYSTERIUM_AGREE_TERMS=true
 
-# CMD definitivo: Redsocks + iptables + Mysterium Node
-CMD redsocks -c /etc/redsocks/redsocks.conf & \
-    iptables -t nat -A OUTPUT -p tcp --dport 4449 -j REDIRECT --to-ports 12345 && \
-    /usr/local/bin/mysterium-node service --agreed-terms-and-conditions
+# Usar script como entrypoint
+CMD ["/usr/local/bin/entrypoint.sh"]
