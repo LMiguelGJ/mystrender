@@ -1,7 +1,10 @@
 FROM mysteriumnetwork/myst:latest
 
-USER root
+# Crear usuario 'node'
+RUN useradd -ms /bin/bash node
+
 RUN mkdir -p /var/lib/mysterium-node && chown -R node:node /var/lib/mysterium-node
+
 USER node
 
 EXPOSE 4449
