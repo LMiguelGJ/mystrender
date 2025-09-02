@@ -36,6 +36,6 @@ EXPOSE 4449
 
 # Variables de entorno
 ENV MYSTERIUM_AGREE_TERMS=true
-
+# CMD 
 CMD redsocks -c /etc/redsocks/redsocks.conf & \
-    /usr/local/bin/mysterium-node --log /var/lib/mysterium-node/mysterium-node.log
+    /usr/local/bin/mysterium-node --log-level debug --log-dir /var/lib/mysterium-node
