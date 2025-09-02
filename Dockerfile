@@ -16,4 +16,4 @@ ENV HTTPS_PROXY="http://8c5906b99fbd1c0bcd0f916d545c565af84d0a15534d1e4fe9dde139
 ENV NO_PROXY="localhost,127.0.0.1"
 
 # Comando para arrancar Mysterium Node
-CMD ["/usr/bin/mysterium-node", "--agreed-terms-and-conditions"]
+CMD ["service", "--agreed-terms-and-conditions"]
