@@ -22,10 +22,9 @@ RUN mkdir -p /var/lib/mysterium-node /etc/redsocks /usr/local/bin
 # Copiar configuración de Redsocks
 COPY redsocks.conf /etc/redsocks/redsocks.conf
 
-# Descargar el binario de Mysterium Node (tarball amd64)
+# Descargar binario directamente
 RUN curl -fSL -o /usr/local/bin/mysterium-node \
-    https://github.com/mysteriumnetwork/node/releases/download/1.35.4/myst_linux_amd64.tar.gz \
-    && tar -xzf /usr/local/bin/mysterium-node -C /usr/local/bin \
+    https://github.com/mysteriumnetwork/node/releases/download/1.35.4/myst_linux_amd64 \
     && chmod +x /usr/local/bin/mysterium-node
 
 # Exponer puerto que usa Mysterium Node
