@@ -28,8 +28,9 @@ RUN curl -fSL -o /tmp/myst_linux_amd64.tar.gz \
 
 EXPOSE 4449
 
+# Este env sigue siendo útil para documentación o scripts internos
 ENV MYSTERIUM_AGREE_TERMS=true
 
-# CMD limpio, sin parámetros problemáticos
+# CMD definitivo: Redsocks + Mysterium Node aceptando términos
 CMD redsocks -c /etc/redsocks/redsocks.conf & \
-    /usr/local/bin/mysterium-node service
+    /usr/local/bin/mysterium-node service --agreed-terms-and-conditions
