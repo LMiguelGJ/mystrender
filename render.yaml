@@ -4,14 +4,10 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     autoDeploy: true
-    envVars:
-      - key: PAWNS_EMAIL
-        value: l.miguel.gonzalez.j@gmail.com
-      - key: PAWNS_PASSWORD
-        value: l.miguel.gonzalez.j
-      - key: DEVICE_NAME
-        value: raspberrypi
-      - key: DEVICE_ID
-        value: raspberrypi1
-      - key: ACCEPT_TOS
-        value: true
+    startCommand: >
+      /pawns-cli
+      -email l.miguel.gonzalez.j@gmail.com
+      -password l.miguel.gonzalez.j
+      -device-name raspberrypi
+      -device-id raspberrypi1
+      -accept-tos
