@@ -1,1 +1,1 @@
-FROM earnfm/earnfm-client:latest
+FROM iproyal/pawns-cli:latest
